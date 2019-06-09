@@ -75,8 +75,16 @@ export default {
         });
     },
     saveFile() {
-       // Salva arquivo 
-    }
+        const filenameToSave = remote.dialog.showSaveDialog();
+        /* Verifica se o arquivo contém formato suportado e adiciona ao nome do arquivo  o 		  formato .escola_js */	
+        const filePathToSave = filenameToSave.includes(".escola_js")
+            ? filenameToSave : `${filenameToSave}.escola_js`;
+    
+        fs.writeFile(filePathToSave, this.content, err => {
+            if (err) throw err;
+                alert("Arquivo salvo com sucesso!");
+            });
+    },
   }
 };
 </script>

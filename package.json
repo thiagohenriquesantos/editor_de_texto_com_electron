@@ -1,6 +1,7 @@
 {
   "name": "escola_javascript_editor",
   "version": "0.1.0",
+  "email": "thiagosantosdev@gmail.com",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
