@@ -1,6 +1,17 @@
+<template>
+  <div class="editor">
+    <button @click="openFile" class="button is-small is-primary is-outlined">Abrir Arquivo</button>
+    <button @click="saveFile" class="button is-small is-info is-outlined">Salvar Arquivo</button>
+    <quill-editor v-model="content" :options="editorOption"></quill-editor>
+  </div>
+</template>
+
 <script>
 import hljs from "highlight.js";
+import { remote } from "electron";
 import "highlight.js/styles/monokai-sublime.css";
+import "bulma/css/bulma.min.css";
+import fs from "fs";
 
 export default {
   name: "Editor",
@@ -27,7 +38,7 @@ export default {
               ["clean"],
               ["link", "image", "video"]
             ],
-            handlers: { emoji: () => {} }
+            handlers: { emoji: function() {} }
           },
           syntax: {
             highlight: text => hljs.highlightAuto(text).value
@@ -43,12 +54,19 @@ export default {
     };
   },
   methods: {
+    openFile() {
+		// Abre arquivo
+    },
+    saveFile() {
+       // Salva arquivo 
+    }
   }
 };
 </script>
 
 <style>
-.quill-editor, .quill-code {
+.quill-editor,
+.quill-code {
   width: 100%;
   height: 90vh;
 }
@@ -64,5 +82,9 @@ export default {
   line-height: 3em;
   text-indent: 1rem;
   font-weight: bold;
+}
+
+button {
+  margin: 5px 5px 5px 5px;
 }
 </style>
