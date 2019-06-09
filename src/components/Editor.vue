@@ -55,7 +55,24 @@ export default {
   },
   methods: {
     openFile() {
-		// Abre arquivo
+        const [filepath] = remote.dialog.showOpenDialog({
+            properties: ["openFile"]
+        });
+        const context = this;
+        /* Verifica se o usuário não selecionou nenhum arquivo ou 
+    selecionou um formato de arquivo não suportado */	
+        if (filepath === undefined || !filepath.includes(".escola_js")) {
+            alert("Nenhum arquivo selecionado ou formato não suportado.");
+            return;
+        }
+        fs.readFile(filepath, "utf-8", (err, data) => {
+            if (err) {
+            alert("Um erro ocorreu ao abrir arquivo:" + err.message);
+            return;
+            }
+            // Adiciona o conteúdo do arquivo ao editor  
+            context.content = data;
+        });
     },
     saveFile() {
        // Salva arquivo 
